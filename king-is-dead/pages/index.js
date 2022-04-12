@@ -5,7 +5,7 @@ import BoardMap from '../components/BoardMap/BoardMap.jsx'
 
 import { InstabilityDisc, NegotiationDisc, ScottishControlDisc, EnglishControlDisc, WelshControlDisc } from '../components/Disc/Disc.jsx';
 import { EnglishFollower, ScottishFollower, WelshFollower } from '../components/Follower/Follower';
-import Card from '../components/Card/Card';
+import ActionCard, { AssembleCard, EnglishSupportCard, NegotiateCard, ManouevreCard, OutmanouevreCard, ScottishSupport, WelshSupport } from '../components/ActionCard/ActionCard';
 
 export default function Home() {
   return (
@@ -25,7 +25,14 @@ export default function Home() {
         <ScottishControlDisc/>
         <EnglishControlDisc/>
         <WelshControlDisc/>
-        <Card/>
+        
+        <AssembleCard/>
+        <EnglishSupportCard/>
+        <ManouevreCard/>
+        <NegotiateCard/>
+        <OutmanouevreCard/>
+        <ScottishSupport/>
+        <WelshSupport/>
       </main>
     </div>
   )
