@@ -1,0 +1,100 @@
+@import '../../styles/variables.scss';
+
+@keyframes cubing{
+    0%{
+      transform:rotate(45deg);
+    }
+    100%{
+      transform:rotate(-360deg);
+    }
+}
+
+.disc {
+	width: 60px;
+	border-radius: 30px/15px;
+    height: 38px;
+    position:relative;
+    animation:cubing 0.8s ease-in-out 1;
+}
+
+.disc:before {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 60px;
+	height: 30px;
+	border-radius: 30px/15px;
+	content: '';
+    border:1px solid rgb(53, 53, 53);
+}
+
+.disc:after {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 60px;
+	height: 30px;
+	border-radius: 30px/15px;
+	content: '';
+    border:1px solid rgb(53, 53, 53);
+    z-index: -1;
+}
+
+
+.scottish{
+    background-color: $color-scottish;
+    
+    &::before{
+        background-color: $color-scottish;
+    }
+    &::after{
+        background-color: $color-scottish;
+    }
+}
+
+.welsh{
+    background-color: $color-welsh;
+    
+    &::before{
+        background-color: $color-welsh;
+    }
+    &::after{
+        background-color: $color-welsh;
+    }
+}
+
+.english{
+    background-color: $color-english;
+    
+    &::before{
+        background-color: $color-english;
+    }
+    &::after{
+        background-color: $color-english;
+    }
+}
+
+.instability{
+    background-color: $color-instability;
+    border-color: rgb(191, 191, 191);
+    
+    &::before{
+        background-color: $color-instability;
+        border-color: rgb(191, 191, 191);
+    }
+    &::after{
+        background-color: $color-instability;
+        border-color: rgb(191, 191, 191);
+    }
+}
+
+.negotiation{
+    background-color: $color-white;
+
+    &::before{
+        background-color: $color-white;
+    }
+    &::after{
+        background-color: $color-white;
+    }
+}
