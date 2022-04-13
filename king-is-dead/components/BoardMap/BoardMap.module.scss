@@ -3,97 +3,181 @@
     // width:856px;
     // height: 1163px;
     // overflow: hidden;
-    right:0;
-    position: absolute;
-    min-height: 100vh;
-    width: 50vw;
+    // right:0;
+    // position: absolute;
+    // height: 100vh;
+    // width: 100%;
+    // min-height: 100vh;
+
+    // width: calc(50vw + 310px);//cardwidth x 2
+    // position:absolute;
+    // right:0;
+    display: flex;
+    justify-content: center;
+    position: relative;
 }
 
 .mapImage{
-
+    height: calc(100vh - 30px);
+    object-fit: contain;
 }
+
+.followerContainer{
+    display: flex;    
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    transform: scale(0.65);
+
+    &>div{
+        margin-right:10px;
+    }
+}
+
 .region{
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .morray{
-    position:absolute;
-    top:70px;
-    left:170px;
-    width:230px;
-    height:190px;
+    position: absolute;
+    top: 66px;
+    left: 307px;
+    width: 155px;
+    height: 197px;
     // border:1px solid red;
 }
 .strathclyde{
-    position:absolute;
-    top:284px;
-    left:223px;
-    width:233px;
-    height:91px;
+    position: absolute;
+    top: 284px;
+    left: 323px;
+    width: 160px;
+    height: 91px;
     // border:1px solid green;
 }
 .northumbria{
-    position:absolute;
-    top:420px;
-    left:446px;
-    width:115px;
-    height:200px;
+    position: absolute;
+    top: 420px;
+    left: 530px;
+    width: 115px;
+    height: 227px;
     // border:1px solid yellow;
 }
 .lancaster{
-    position:absolute;
-    top:451px;
-    left:327px;
-    width:113px;
-    height:122px;
+    position: absolute;
+    top: 459px;
+    left: 417px;
+    width: 137px;
+    height: 144px;
     // border:1px solid limegreen;
 }
 .gwynedd{
-    position:absolute;
-    top:563px;
-    left:269px;
-    width:121px;
-    height:184px;
+    position: absolute;
+    top: 563px;
+    left: 362px;
+    width: 114px;
+    height: 196px;
     // border:1px solid blue;
 }
 .warwick{
-    position:absolute;
-    top:608px;
-    left:387px;
-    width:141px;
-    height:119px;
+    position: absolute;
+    top: 593px;
+    left: 471px;
+    width: 141px;
+    height: 119px;
     // border:1px solid blueviolet;
 }
 .essex{
-    position:absolute;
-    top:612px;
-    left:500px;
-    width:163px;
-    height:203px;
+    position: absolute;
+    top: 604px;
+    left: 574px;
+    width: 146px;
+    height: 203px;
     // border:1px solid sienna;
 }
 .devon{
-    position:absolute;
-    top:731px;
-    left:260px;
-    width:257px;
-    height:114px;
+    position: absolute;
+    top: 713px;
+    left: 427px;
+    width: 159px;
+    height: 108px;
     // border:1px solid orange;
 }
 .france{
-    position:absolute;
-    top:808px;
-    left:582px;
-    width:187px;
-    height:137px;
+    position: absolute;
+    top: 792px;
+    left: 667px;
+    width: 171px;
+    height: 133px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap-reverse;
+    align-items: center;
+    transform: rotateY(-180deg);
     // border:1px solid rosybrown;
 }
 .bank{
-    position:absolute;
-    top:80px;
-    left:561px;
-    width:166px;
-    height:238px;
-    // border:1px solid gold; 
+    position: absolute;
+    top: 89px;
+    left: 640px;
+    width: 166px;
+    height: 238px;
+    display: flex;
+    transform: scale(0.6);
+    transform-origin: top;
 }
+
+.bankFollowers{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+//region cards
+
+.regionCardPlacement{
+    position:absolute;
+    bottom:0;
+}
+
+.one {
+    top:10px;
+    left:0;
+}
+
+.two {
+    top:238px;
+    left:0;
+}
+
+.three {
+    top:467px;
+    left:0;
+}
+
+.four {
+    top:696px;
+    left:0;
+}
+
+.five {
+    top:10px;
+    right:0;
+}
+
+.six {
+    top:238px;
+    right:0;
+}
+
+.seven {
+    top:467px;
+    right:0;
+}
+
+.eight {
+    top:696px;
+    right:0;
+}
+
+

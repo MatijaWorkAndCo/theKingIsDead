@@ -28,10 +28,6 @@
     transform: rotateY(180deg);
 }
 
-.front{
-    background-image: url("/images/backface-card.jpeg");
-}
-
 .flipped{
     .front {
         transform: rotateY(180deg);

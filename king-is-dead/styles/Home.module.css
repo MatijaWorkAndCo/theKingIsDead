@@ -1,13 +1,55 @@
 .container {
   /* padding: 0 2rem; */
+
+  margin:0;
+  padding:0;
 }
 
 .main {
   /* min-height: 100vh; */
   /* padding: 4rem 0; */
-  /* flex: 1;
+
   display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  height: calc(100vh - 30px);
+  margin: 15px;
+  flex: 1;
+}
+
+.right{
+  width: calc(50vw + 150px);
+
+}
+
+.left{
+  /* width: calc(50vw - 310px); */
+  display: flex;
+  justify-content: space-between;
   flex-direction: column;
-  justify-content: center;
-  align-items: center; */
+}
+
+.deckHolder{
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    ". . . ."
+    ". . . ."; 
+  gap: 5px 5px; 
+}
+
+.players{
+  height: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.discs {
+display: flex;
+}
+
+.followers {
+display: flex;
 }
