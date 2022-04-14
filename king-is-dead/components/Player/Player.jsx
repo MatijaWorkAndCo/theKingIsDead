@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import styles from './Player.module.scss';
 import cx from 'classnames';
 import { EnglishFollower, ScottishFollower, WelshFollower } from '../Follower/Follower';
@@ -12,7 +11,9 @@ const playerId = {
 
 const Player = ({player, playerState, playedCards}) => {
     const playerNo = player === playerId.playerOne ? "one":"two";
-    const {followers,negotiationDisc} = playerState;
+    const { followers,negotiationDisc } = playerState;
+
+    // console.log(playerState)
 
     return (
         <div className={styles.playerWrapper}>
@@ -23,18 +24,18 @@ const Player = ({player, playerState, playedCards}) => {
                     {negotiationDisc && <NegotiationDisc/>}
                 </div>
             </div>
+            <h2 className={cx(styles.courtTitle, styles[playerNo])}>Court:</h2>
             <div className={styles.court}>
                 <div className={styles.followers}>
-                    {followers.scottish && Array(followers.scottish).fill(<ScottishFollower />)}
+                    {followers.scottish !== 0 && [...Array(followers.scottish)].map((e, i) => <ScottishFollower key={`${playerNo}-scottish-${i}`}/>)}
                 </div>
                 <div className={styles.followers}>
-                    {followers.english && Array(followers.english).fill(<EnglishFollower />)}
+                    {followers.english !== 0 && [...Array(followers.english)].map((e, i) => <EnglishFollower key={`${playerNo}-english-${i}`}/>)}
                 </div>
                 <div className={styles.followers}>
-                    {followers.welsh && Array(followers.welsh).fill(<WelshFollower />)}
+                    {followers.welsh !== 0 && [...Array(followers.welsh)].map((e, i) => <WelshFollower key={`${playerNo}-welsh-${i}`}/>)}
                 </div>
             </div>
-       
         </div>
     )
 }

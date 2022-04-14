@@ -1,5 +1,4 @@
 .boardWrapper{
-    // border:4px solid gray;
     // width:856px;
     // height: 1163px;
     // overflow: hidden;
@@ -29,7 +28,7 @@
     flex-wrap: wrap;
     transform: scale(0.65);
 
-    &>div{
+    &>button{
         margin-right:10px;
     }
 }
@@ -40,13 +39,12 @@
     justify-content: center;
 }
 
-.morray{
+.moray{
     position: absolute;
     top: 66px;
     left: 307px;
     width: 155px;
     height: 197px;
-    // border:1px solid red;
 }
 .strathclyde{
     position: absolute;
@@ -54,7 +52,6 @@
     left: 323px;
     width: 160px;
     height: 91px;
-    // border:1px solid green;
 }
 .northumbria{
     position: absolute;
@@ -62,7 +59,6 @@
     left: 530px;
     width: 115px;
     height: 227px;
-    // border:1px solid yellow;
 }
 .lancaster{
     position: absolute;
@@ -70,7 +66,6 @@
     left: 417px;
     width: 137px;
     height: 144px;
-    // border:1px solid limegreen;
 }
 .gwynedd{
     position: absolute;
@@ -78,7 +73,6 @@
     left: 362px;
     width: 114px;
     height: 196px;
-    // border:1px solid blue;
 }
 .warwick{
     position: absolute;
@@ -86,7 +80,6 @@
     left: 471px;
     width: 141px;
     height: 119px;
-    // border:1px solid blueviolet;
 }
 .essex{
     position: absolute;
@@ -94,7 +87,6 @@
     left: 574px;
     width: 146px;
     height: 203px;
-    // border:1px solid sienna;
 }
 .devon{
     position: absolute;
@@ -102,7 +94,6 @@
     left: 427px;
     width: 159px;
     height: 108px;
-    // border:1px solid orange;
 }
 .france{
     position: absolute;
@@ -115,7 +106,6 @@
     flex-wrap: wrap-reverse;
     align-items: center;
     transform: rotateY(-180deg);
-    // border:1px solid rosybrown;
 }
 .bank{
     position: absolute;
@@ -124,8 +114,13 @@
     width: 166px;
     height: 238px;
     display: flex;
-    transform: scale(0.6);
+    transform: scale(0.65);
     transform-origin: top;
+    flex-direction: column;
+    flex-wrap: wrap;
+    & button{
+        margin-right:10px;
+    }
 }
 
 .bankFollowers{

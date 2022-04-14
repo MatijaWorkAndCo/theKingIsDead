@@ -14,13 +14,12 @@
     border-style: solid;
     border-width: 10px;
     padding:10px;
-    
 }
 
 
 .playerName {
     font-family: Medieval;
-    font-size:50px;
+    font-size:46px;
     -webkit-text-stroke: 1px rgb(174, 174, 174);
 }
 
@@ -40,6 +39,13 @@
     margin-left:10px;
 }
 
+.courtTitle{
+    margin-left:10px;
+    font-family: Medieval;
+    font-size:24px;
+    -webkit-text-stroke: 1px rgb(143, 143, 143);
+}
+
 .followers{
     display: flex;
 }
@@ -49,13 +55,12 @@
 }
 
 .playedCards{
-    margin:20px;
-    margin-left:10px;
+    margin:10px;
     position:relative;
 }
 
 .negotiationDisc{
     position:absolute;
     bottom:0;
-    right:-15px;
+    right:-10px;
 }

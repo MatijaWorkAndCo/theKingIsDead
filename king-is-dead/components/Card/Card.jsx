@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState,useEffect} from "react";
 import cx from "classnames";
 import styles from './Card.module.scss';
 
@@ -27,40 +27,43 @@ const cardType = {
     region: "regionCard"
 }
 
-const ActionCard = ({cardImage,type})=>{
+const ActionCard = ({cardImage,type,isFaceup})=>{
     const [isFrontSide, setIsFrontSide] = useState(false);
 
     const handleClick = ()=>{
         setIsFrontSide(!isFrontSide);
     }
+    useEffect(() => {
+        isFaceup && setIsFrontSide(true);
+    }, [isFaceup])
+
     const cardBackface = type===cardType.action?"/images/backface-card.jpeg":"/images/region-backface-card.png";
     return(
-        <>
-            <div className={cx(styles.card,{[styles.flipped]:isFrontSide})} onClick={handleClick} >
+        <button onClick={handleClick}>
+            <div className={cx(styles.card,{[styles.flipped]:isFrontSide})}  >
                 <div className={cx(styles.front)}style={{backgroundImage:`url("${cardBackface}")`}} >
                     <div className={styles.back} style={{backgroundImage:`url("${cardImage}")`}}/>
                 </div>
             </div>
-        </>
+        </button>
     )
 }
 
 export default ActionCard;
 
-export const AssembleCard = ()=><ActionCard cardImage={imageMap.assemble} type={cardType.action}/>;
-export const EnglishSupportCard = ()=><ActionCard cardImage={imageMap.englishSupport} type={cardType.action}/>;
-export const ManouevreCard = ()=><ActionCard cardImage={imageMap.manouevre} type={cardType.action}/>;
-export const NegotiateCard = ()=><ActionCard cardImage={imageMap.negotiate} type={cardType.action}/>;
-export const OutmanouevreCard = ()=><ActionCard cardImage={imageMap.outmanoeuvre} type={cardType.action}/>;
-export const ScottishSupport = ()=><ActionCard cardImage={imageMap.scottishSupport} type={cardType.action}/>;
-export const WelshSupport = ()=><ActionCard cardImage={imageMap.welshSupport} type={cardType.action}/>;
+export const AssembleCard = ({isFaceup})=><ActionCard cardImage={imageMap.assemble} type={cardType.action} isFaceup={isFaceup}/>;
+export const EnglishSupportCard = ({isFaceup})=><ActionCard cardImage={imageMap.englishSupport} type={cardType.action} isFaceup={isFaceup}/>;
+export const ManouevreCard = ({isFaceup})=><ActionCard cardImage={imageMap.manouevre} type={cardType.action} isFaceup={isFaceup}/>;
+export const NegotiateCard = ({isFaceup})=><ActionCard cardImage={imageMap.negotiate} type={cardType.action} isFaceup={isFaceup}/>;
+export const OutmanouevreCard = ({isFaceup})=><ActionCard cardImage={imageMap.outmanoeuvre} type={cardType.action} isFaceup={isFaceup}/>;
+export const ScottishSupport = ({isFaceup})=><ActionCard cardImage={imageMap.scottishSupport} type={cardType.action} isFaceup={isFaceup}/>;
+export const WelshSupport = ({isFaceup})=><ActionCard cardImage={imageMap.welshSupport} type={cardType.action} isFaceup={isFaceup}/>;
 
-
-export const MorayCard = ()=><ActionCard cardImage={imageMap.moray} type={cardType.region}/>;
-export const DevonCard = ()=><ActionCard cardImage={imageMap.devon} type={cardType.region}/>;
-export const EssexCard = ()=><ActionCard cardImage={imageMap.essex} type={cardType.region}/>;
-export const GwyneddCard = ()=><ActionCard cardImage={imageMap.gwynedd} type={cardType.region}/>;
-export const LancasterCard = ()=><ActionCard cardImage={imageMap.lancaster} type={cardType.region}/>;
-export const NorthumbriaCard = ()=><ActionCard cardImage={imageMap.northumbria} type={cardType.region}/>;
-export const StrathclydeCard = ()=><ActionCard cardImage={imageMap.strathclyde} type={cardType.region}/>;
-export const WarwickCard = ()=><ActionCard cardImage={imageMap.warwick} type={cardType.region}/>;
+export const MorayCard = ({isFaceup})=><ActionCard cardImage={imageMap.moray} type={cardType.region} isFaceup={isFaceup}/>;
+export const DevonCard = ({isFaceup})=><ActionCard cardImage={imageMap.devon} type={cardType.region} isFaceup={isFaceup}/>;
+export const EssexCard = ({isFaceup})=><ActionCard cardImage={imageMap.essex} type={cardType.region} isFaceup={isFaceup}/>;
+export const GwyneddCard = ({isFaceup})=><ActionCard cardImage={imageMap.gwynedd} type={cardType.region} isFaceup={isFaceup}/>;
+export const LancasterCard = ({isFaceup})=><ActionCard cardImage={imageMap.lancaster} type={cardType.region} isFaceup={isFaceup}/>;
+export const NorthumbriaCard = ({isFaceup})=><ActionCard cardImage={imageMap.northumbria} type={cardType.region} isFaceup={isFaceup}/>;
+export const StrathclydeCard = ({isFaceup})=><ActionCard cardImage={imageMap.strathclyde} type={cardType.region} isFaceup={isFaceup}/>;
+export const WarwickCard = ({isFaceup})=><ActionCard cardImage={imageMap.warwick} type={cardType.region} isFaceup={isFaceup}/>;

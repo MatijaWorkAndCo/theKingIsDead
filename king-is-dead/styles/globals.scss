@@ -36,9 +36,9 @@ a {
 }
 
 /* Reapply the pointer cursor for anchor tags */
-a, button {
-  cursor: revert;
-}
+// a, button {
+//   cursor: revert;
+// }
 
 /* Remove list styles (bullets/numbers) */
 ol, ul, menu {
@@ -102,4 +102,7 @@ meter {
 html{
   background: url("/images/vintage-wallpaper.png");
   background-repeat: repeat;
+}
+button{
+  cursor: pointer;
 }
