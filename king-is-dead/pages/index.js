@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import {useState,useEffect} from 'react';
+import React, {useState,useEffect} from 'react';
 import styles from '../styles/Home.module.css';
 import BoardMap from '../components/BoardMap/BoardMap.jsx';
 import {shuffle,randomizeFollowers,randomIntFromInterval} from '../lib/helper.js';
@@ -8,8 +8,9 @@ import { InstabilityDisc, NegotiationDisc, ScottishControlDisc, EnglishControlDi
 import { EnglishFollower, ScottishFollower, WelshFollower } from '../components/Follower/Follower';
 import { AssembleCard, EnglishSupportCard, NegotiateCard, ManouevreCard, OutmanouevreCard, ScottishSupport, WelshSupport} from '../components/Card/Card';
 import { PlayerOne, PlayerTwo } from '../components/Player/Player.jsx';
+import Hourglass from '../components/Hourglass/Hourglass';
 
-const playerInitalState = {
+const playerOneInitalState = {
   followers:{
     scottish:0,
     english:0,
@@ -17,7 +18,18 @@ const playerInitalState = {
   },
   negotiationDisc: true,
   playedCards:[],
-  startingCards:[]
+  cards:["assemble","englishSupport","manouevre","negotiate","outmanouevre","scottishSupport","welshSupport","assemble"]
+}
+
+const playerTwoInitalState = {
+  followers:{
+    scottish:0,
+    english:0,
+    welsh:0,
+  },
+  negotiationDisc: true,
+  playedCards:[],
+  cards:["assemble","englishSupport","manouevre","negotiate","outmanouevre","scottishSupport","welshSupport","assemble"]
 }
 
 const initalMapState = {
@@ -97,26 +109,29 @@ const initalMapState = {
 
 const initalRegionCards = ["moray", "devon", "essex", "gwynedd", "lancaster", "northumbria", "strathclyde", "warwick",];
 
-export default function Home() {
-  const [regionCards, setRegionCards] = useState(shuffle(initalRegionCards));
+const PlayerTurn = React.createContext('playerOne');
 
-  const [playerOneState, setPlayerOneState] = useState(playerInitalState);
-  const [playerTwoState, setPlayerTwoState] = useState(playerInitalState);
+export default function Home() {
+  const [regionCards, setRegionCards] = useState([]);
+  
+  const [playerTurn, setPlayerTurn] = useState('playerOne');
+
+  const [playerOneState, setPlayerOneState] = useState(playerOneInitalState);
+  const [playerTwoState, setPlayerTwoState] = useState(playerTwoInitalState);
   const [mapState, setMapState] = useState();
 
   const [hasDeltFollowersToPlayers, setHasDeltFollowersToPlayers] = useState(false);
-
   const [isMapSet, setIsMapSet] = useState(false)
 
   const summonToCourt = (follower,region) => {
     //mozda if region === "bank" alert('must be from a region');
     setMapState({...mapState,[region]:{...mapState[region],followers: {...mapState[region].followers,[follower]:mapState[region].followers[follower] - 1}}});
 
-    // if(playerTurn === "playerOne"){
+    if(playerTurn === "playerOne"){
       setPlayerOneState({...playerOneState,followers:{...playerOneState.followers,[follower]: playerOneState.followers[follower] + 1} })
-    // }
-    // if(playerTurn === "playerTwo"){
-    // }
+    }else {
+      setPlayerTwoState({...playerTwoState,followers:{...playerTwoState.followers,[follower]: playerTwoState.followers[follower] + 1} })
+    }
   }
 
   const initalMapStateCopy = initalMapState;
@@ -156,12 +171,53 @@ export default function Home() {
     console.log('wrf');
     
     isMapSet === false && setMapState(randomizeFollowers(initalMapStateCopy));
+
     setIsMapSet(true);
 
     mapState && hasDeltFollowersToPlayers === false && dealFollowersToPlayers();
     
-    
   }, [mapState]);
+
+  const [isPlayerCardsFaceup, setIsPlayerCardsFaceup] = useState(true);
+  
+  // add player as argument
+  const consumeCard = (card)=>{
+    const playerOneStateCopy = {...playerOneState};
+    const removeFromArray = (array,element)=>{
+      const index= array.indexOf(element);
+      if (index > -1) {
+        array.splice(index, 1);
+      }
+      return array
+    }
+
+    if(playerTurn === 'playerOne'){
+      setPlayerOneState({...playerOneState,playedCards:[...playerOneState.playedCards,card],cards:removeFromArray(playerOneState.cards, card)})
+    } else{
+      setPlayerTwoState({...playerTwoState,playedCards:[...playerTwoState.playedCards,card],cards:removeFromArray(playerTwoState.cards, card)})
+    }
+
+  }
+
+  const cardsMap = {
+    assemble:<AssembleCard isFaceup={isPlayerCardsFaceup} consumeCard={consumeCard}/>,
+    englishSupport:<EnglishSupportCard isFaceup={isPlayerCardsFaceup} consumeCard={consumeCard} />,
+    manouevre:<ManouevreCard isFaceup={isPlayerCardsFaceup} consumeCard={consumeCard} />,
+    negotiate:<NegotiateCard isFaceup={isPlayerCardsFaceup} consumeCard={consumeCard} />,
+    outmanouevre:<OutmanouevreCard isFaceup={isPlayerCardsFaceup} consumeCard={consumeCard}/>,
+    scottishSupport:<ScottishSupport isFaceup={isPlayerCardsFaceup} consumeCard={consumeCard}/>,
+    welshSupport:<WelshSupport isFaceup={isPlayerCardsFaceup} consumeCard={consumeCard} />,
+  }
+
+  useEffect(() => {
+    setRegionCards(shuffle(initalRegionCards));
+    // setPlayerOneState(playerInitalState);
+    // setPlayerTwoState(playerInitalState);
+  }, [])
+
+  const handleSkipTurn= ()=>{
+    playerTurn === 'playerOne' ? setPlayerTurn('playerTwo') : setPlayerTurn('playerOne');
+  }
 
   return (
     <div className={styles.container}>
@@ -169,9 +225,16 @@ export default function Home() {
         <title>The King Is Dead</title>        
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <PlayerTurn.Provider value={playerTurn}>
       <main className={styles.main}>
         <div className={styles.left}>
           <div className={styles.players}>
+            <div className={styles.menu}>
+              <Hourglass callToAction={handleSkipTurn}/>
+              <a className={styles.rulebook} target="_blank" href="https://cdn.1j1ju.com/medias/23/cc/5c-the-king-is-dead-rulebook.pdf#page=6">
+                <img src={'/images/paper-quill.png'}/>
+              </a>
+            </div>
             <div className={styles.playerOne}>
             {playerOneState && <PlayerOne playerState={playerOneState}/>}
             </div>
@@ -180,34 +243,20 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.deckHolder}>
-            <AssembleCard/>
-            <EnglishSupportCard/>
-            <ManouevreCard/>
-            <NegotiateCard/>
-            <OutmanouevreCard/>
-            <ScottishSupport/>
-            <WelshSupport/>
-            <AssembleCard/>
+            {playerTurn === "playerOne" ?
+              playerOneState?.cards?.map((element,index)=>{
+                return <div key={`playerOnecard-${index}`}>{cardsMap[element]}</div>
+              }) :
+              playerTwoState?.cards?.map((element,index)=>{
+                return <div key={`playerTwocard-${index}`}>{cardsMap[element]}</div>
+              })}
           </div>
         </div>
         <div className={styles.right}>  
          {mapState && <BoardMap mapState={mapState} regionCards={regionCards} summonToCourt={summonToCourt}/>}
         </div>
-      
-        
       </main>
-      <div className={styles.followers}>
-            <EnglishFollower/>
-            <ScottishFollower/>
-            <WelshFollower/>
-          </div>
-          <div className={styles.discs}>
-            <InstabilityDisc/>
-            <NegotiationDisc/>
-            <ScottishControlDisc/>
-            <EnglishControlDisc/>
-            <WelshControlDisc/>
-          </div>
+      </PlayerTurn.Provider>
     </div>
   )
 }

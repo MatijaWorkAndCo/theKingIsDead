@@ -27,9 +27,9 @@ const renderElement = (regionState,handleClick,region) => {
             { regionState.resolvedTo ? getDisc(regionState.resolvedTo)
             :
             <div className={styles.followerContainer}>
-                {regionState.followers.scottish!==0 && [...Array(regionState.followers.scottish)].map((e, i) =><button key={`scottish-${i}`} onClick={()=>handleClick('scottish',region)}> <ScottishFollower /></button>)}
-                {regionState.followers.english!==0 && [...Array(regionState.followers.english)].map((e, i) => <button key={`english-${i}`} onClick={()=>handleClick('english',region)}><EnglishFollower /></button>)}
-                {regionState.followers.welsh!==0 && [...Array(regionState.followers.welsh)].map((e, i) => <button key={`welsh-${i}`} onClick={()=>handleClick('welsh',region)}><WelshFollower /></button>)}
+                {regionState?.followers?.scottish!==0 && [...Array(regionState?.followers?.scottish)].map((e, i) =><button key={`scottish-${i}`} onClick={()=>handleClick('scottish',region)}> <ScottishFollower /></button>)}
+                {regionState?.followers?.english!==0 && [...Array(regionState?.followers?.english)].map((e, i) => <button key={`english-${i}`} onClick={()=>handleClick('english',region)}><EnglishFollower /></button>)}
+                {regionState?.followers?.welsh!==0 && [...Array(regionState?.followers?.welsh)].map((e, i) => <button key={`welsh-${i}`} onClick={()=>handleClick('welsh',region)}><WelshFollower /></button>)}
             </div>
             }     
        </>    
@@ -75,13 +75,13 @@ const BoardMap = ({mapState, regionCards, summonToCourt})=>{
             />
             <div className={cx(styles.bank)}>
                 <div className={styles.bankFollowers}>
-                    {bank.scottish !== 0 && [...Array(bank.scottish)].map((e, i) => <button key={`bank-scottish-${i}`} onClick={handleClick}><ScottishFollower /></button>)}
+                    {bank?.scottish !== 0 && [...Array(bank?.scottish)].map((e, i) => <button key={`bank-scottish-${i}`} onClick={handleClick}><ScottishFollower /></button>)}
                 </div>
                 <div className={styles.bankFollowers}>
-                    {bank.english!==0 && [...Array(bank.english)].map((e, i) => <button  key={`bank-english-${i}`}  onClick={handleClick}><EnglishFollower/></button>)}
+                    {bank?.english!==0 && [...Array(bank?.english)].map((e, i) => <button  key={`bank-english-${i}`}  onClick={handleClick}><EnglishFollower/></button>)}
                 </div>
                 <div className={styles.bankFollowers}>
-                    {bank.welsh!==0 && [...Array(bank.welsh)].map((e, i) =><button key={`bank-welsh-${i}`} onClick={handleClick}> <WelshFollower /></button>)}
+                    {bank?.welsh!==0 && [...Array(bank?.welsh)].map((e, i) =><button key={`bank-welsh-${i}`} onClick={handleClick}> <WelshFollower /></button>)}
                 </div>
             </div>
             <div className={cx(styles.moray,styles.region)}>{renderElement(mapState.moray,summonToCourt,"moray")}</div>

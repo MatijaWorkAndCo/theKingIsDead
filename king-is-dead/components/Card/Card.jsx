@@ -27,20 +27,25 @@ const cardType = {
     region: "regionCard"
 }
 
-const ActionCard = ({cardImage,type,isFaceup})=>{
-    const [isFrontSide, setIsFrontSide] = useState(false);
+// const  actionCards = ["assemble","englishSupport","manouevre","negotiate","outmanouevre","scottishSupport","welshSupport","assemble"];
 
+const ActionCard = ({cardImage,type,isFaceup,consumeCard,actionCardName})=>{
+    const [isFrontSide, setIsFrontSide] = useState(false);
+    
     const handleClick = ()=>{
         setIsFrontSide(!isFrontSide);
+        type === cardType.action && consumeCard && consumeCard(actionCardName);
     }
+
     useEffect(() => {
         isFaceup && setIsFrontSide(true);
     }, [isFaceup])
 
     const cardBackface = type===cardType.action?"/images/backface-card.jpeg":"/images/region-backface-card.png";
+
     return(
         <button onClick={handleClick}>
-            <div className={cx(styles.card,{[styles.flipped]:isFrontSide})}  >
+            <div className={cx(styles.card,{[styles.flipped]: type === cardType.action ? true : isFrontSide})}  >
                 <div className={cx(styles.front)}style={{backgroundImage:`url("${cardBackface}")`}} >
                     <div className={styles.back} style={{backgroundImage:`url("${cardImage}")`}}/>
                 </div>
@@ -51,13 +56,13 @@ const ActionCard = ({cardImage,type,isFaceup})=>{
 
 export default ActionCard;
 
-export const AssembleCard = ({isFaceup})=><ActionCard cardImage={imageMap.assemble} type={cardType.action} isFaceup={isFaceup}/>;
-export const EnglishSupportCard = ({isFaceup})=><ActionCard cardImage={imageMap.englishSupport} type={cardType.action} isFaceup={isFaceup}/>;
-export const ManouevreCard = ({isFaceup})=><ActionCard cardImage={imageMap.manouevre} type={cardType.action} isFaceup={isFaceup}/>;
-export const NegotiateCard = ({isFaceup})=><ActionCard cardImage={imageMap.negotiate} type={cardType.action} isFaceup={isFaceup}/>;
-export const OutmanouevreCard = ({isFaceup})=><ActionCard cardImage={imageMap.outmanoeuvre} type={cardType.action} isFaceup={isFaceup}/>;
-export const ScottishSupport = ({isFaceup})=><ActionCard cardImage={imageMap.scottishSupport} type={cardType.action} isFaceup={isFaceup}/>;
-export const WelshSupport = ({isFaceup})=><ActionCard cardImage={imageMap.welshSupport} type={cardType.action} isFaceup={isFaceup}/>;
+export const AssembleCard = ({isFaceup,consumeCard})=><ActionCard actionCardName={'assemble'} cardImage={imageMap.assemble} type={cardType.action} isFaceup={isFaceup} consumeCard={consumeCard}/>;
+export const EnglishSupportCard = ({isFaceup,consumeCard})=><ActionCard actionCardName={'englishSupport'} cardImage={imageMap.englishSupport} type={cardType.action} isFaceup={isFaceup} consumeCard={consumeCard}/>;
+export const ManouevreCard = ({isFaceup,consumeCard})=><ActionCard actionCardName={'manouevre'} cardImage={imageMap.manouevre} type={cardType.action} isFaceup={isFaceup} consumeCard={consumeCard}/>;
+export const NegotiateCard = ({isFaceup,consumeCard})=><ActionCard actionCardName={'negotiate'} cardImage={imageMap.negotiate} type={cardType.action} isFaceup={isFaceup} consumeCard={consumeCard}/>;
+export const OutmanouevreCard = ({isFaceup,consumeCard})=><ActionCard actionCardName={'outmanouevre'} cardImage={imageMap.outmanoeuvre} type={cardType.action} isFaceup={isFaceup} consumeCard={consumeCard}/>;
+export const ScottishSupport = ({isFaceup,consumeCard})=><ActionCard actionCardName={'scottishSupport'} cardImage={imageMap.scottishSupport} type={cardType.action} isFaceup={isFaceup} consumeCard={consumeCard}/>;
+export const WelshSupport = ({isFaceup,consumeCard})=><ActionCard actionCardName={'welshSupport'} cardImage={imageMap.welshSupport} type={cardType.action} isFaceup={isFaceup} consumeCard={consumeCard}/>;
 
 export const MorayCard = ({isFaceup})=><ActionCard cardImage={imageMap.moray} type={cardType.region} isFaceup={isFaceup}/>;
 export const DevonCard = ({isFaceup})=><ActionCard cardImage={imageMap.devon} type={cardType.region} isFaceup={isFaceup}/>;

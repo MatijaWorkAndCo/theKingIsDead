@@ -19,7 +19,8 @@
 
 .playerName {
     font-family: Medieval;
-    font-size:46px;
+    font-size:44px;
+    white-space: nowrap;
     -webkit-text-stroke: 1px rgb(174, 174, 174);
 }
 
@@ -56,11 +57,14 @@
 
 .playedCards{
     margin:10px;
+    min-height: 218px;
     position:relative;
+    pointer-events: none;
 }
 
 .negotiationDisc{
     position:absolute;
     bottom:0;
-    right:-10px;
+    right: -18px;
+    transform: scale(0.9);
 }
