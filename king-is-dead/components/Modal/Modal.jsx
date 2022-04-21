@@ -11,6 +11,7 @@ const Modal = ({modalIsOpen,currentPlayer,toggleModal}) => {
             style={styles.reactModal}
             contentLabel="Example Modal"
             closeTimeoutMS={500}
+            ariaHideApp={false}
         >
             <div className={styles.modalContainer}>
                 <div className={styles.modalBox}>

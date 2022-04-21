@@ -198,7 +198,7 @@ export default function Home() {
 
   const [isEligibleForTeritoryClick, setIsEligibleForTeritoryClick] = useState(false);
 
-  const isPowerStruggle = turnState.playerOne === "pass" && turnState.playerTwo === "pass";
+  
 
   const [playerOneState, setPlayerOneState] = useState(playerOneInitalState);
   const [playerTwoState, setPlayerTwoState] = useState(playerTwoInitalState);
@@ -207,10 +207,10 @@ export default function Home() {
   const [hasDeltFollowersToPlayers, setHasDeltFollowersToPlayers] = useState(false);
   const [isMapSet, setIsMapSet] = useState(false)
       
-  const handleNextTurn = (action) => { 
+  const handleNextTurn = (doneAction) => { 
     setTurnState(playerTurn === 'playerOne'?
-    {...turnState,playerOne:action}:
-    {...turnState,playerTwo:action});
+    {...turnState,playerOne:doneAction}:
+    {...turnState,playerTwo:doneAction});
 
     setTimeout(() => {
       toggleModal()
@@ -306,7 +306,7 @@ export default function Home() {
             cards:removeFromArray(playerTwoCopy.cards, card)
           }
         }
-
+          // I think this can be done with regionCards state
         const controller = new AbortController();
 
         const cardHandler=(index)=>{
@@ -626,13 +626,15 @@ export default function Home() {
   }, [])
   
   useEffect(() => {
+    const isPowerStruggle = turnState.playerOne === "skip" && turnState.playerTwo === "skip";
     if(isPowerStruggle){
+      alert("resolving power struggle");
       resolveRegionPowerStruggle();
       
       setTurnState({playerOne:'',playerTwo:''});
       setCurrentRegionStruggle(currentRegionStruggle + 1);  
     }
-  }, [turnState]);
+  },[turnState]);
 
   // useEffect(() => {
 
