@@ -720,7 +720,7 @@ export default function Home() {
                 {/* <div>Last Turn: {playerTurn === "playerOne" ? "Player Two" :"Player One"} {playerTurn !== "playerOne" ? turnState.playerOne : turnState.playerTwo} </div> */}
               </div>
               <Hourglass callToAction={handleSkipTurn}/>
-              <a className={styles.rulebook} target="_blank" href="https://cdn.1j1ju.com/medias/23/cc/5c-the-king-is-dead-rulebook.pdf#page=6">
+              <a className={styles.rulebook} rel="noreferrer" target="_blank" href="https://cdn.1j1ju.com/medias/23/cc/5c-the-king-is-dead-rulebook.pdf#page=6">
                 <img src={'/images/paper-quill.png'}/>
               </a>
             </div>

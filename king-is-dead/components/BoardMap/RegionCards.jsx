@@ -21,6 +21,7 @@ const RegionCards = ({regionCards,cardRef})=>{
                     <div 
                         className={cx(styles.regionCardPlacement,styles[`card-${index +1}`])}
                         ref={(element) => element && !cardRef.current.includes(element) && cardRef.current.push(element)}
+                        key={`cardid-${index}`} 
                     >
                         <CardComponent isFaceup={element.isFaceup} withNegotiationDisc={element.withNegotiationDisc}/>   
                     </div>
