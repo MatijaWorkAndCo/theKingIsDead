@@ -51,13 +51,13 @@ const BoardMap = ({cardRef,mapState,regionCards,handleFollowerOnMapClick,handleF
             />
             <div className={cx(styles.bank)}>
                 <div className={styles.bankFollowers}>
-                    {bank?.scottish !== 0 && [...Array(bank?.scottish)].map((e, i) => <button key={`bank-scottish-${i}`} onClick={()=>handleFollowerInBankClick("scottish")}><ScottishFollower /></button>)}
+                    {bank?.scottish.length && [...Array(bank?.scottish)].map((e, i) => <button key={`bank-scottish-${i}`} onClick={()=>handleFollowerInBankClick("scottish")}><ScottishFollower /></button>)}
                 </div>
                 <div className={styles.bankFollowers}>
-                    {bank?.english!==0 && [...Array(bank?.english)].map((e, i) => <button  key={`bank-english-${i}`}  onClick={()=>handleFollowerInBankClick("english")}><EnglishFollower/></button>)}
+                    {bank?.english.length && [...Array(bank?.english)].map((e, i) => <button  key={`bank-english-${i}`}  onClick={()=>handleFollowerInBankClick("english")}><EnglishFollower/></button>)}
                 </div>
                 <div className={styles.bankFollowers}>
-                    {bank?.welsh!==0 && [...Array(bank?.welsh)].map((e, i) =><button key={`bank-welsh-${i}`} onClick={()=>handleFollowerInBankClick("welsh")}> <WelshFollower /></button>)}
+                    {bank?.welsh.length && [...Array(bank?.welsh)].map((e, i) =><button key={`bank-welsh-${i}`} onClick={()=>handleFollowerInBankClick("welsh")}> <WelshFollower /></button>)}
                 </div>
             </div>
             <div onClick={()=>handleTeritoryClick('moray')} className={cx(styles.moray,styles.region)}>{renderElement(mapState.moray,handleFollowerOnMapClick,"moray")}</div>
