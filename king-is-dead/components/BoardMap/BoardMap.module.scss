@@ -17,7 +17,8 @@
 }
 
 .mapImage{
-    height: calc(100vh - 30px);
+    // height: calc(100vh - 30px);
+    height:954px;
     object-fit: contain;
 }
 
@@ -135,42 +136,42 @@
     bottom:0;
 }
 
-.one {
+.card-1 {
     top:10px;
     left:0;
 }
 
-.two {
+.card-2 {
     top:238px;
     left:0;
 }
 
-.three {
+.card-3 {
     top:467px;
     left:0;
 }
 
-.four {
+.card-4 {
     top:696px;
     left:0;
 }
 
-.five {
+.card-5 {
     top:10px;
     right:0;
 }
 
-.six {
+.card-6 {
     top:238px;
     right:0;
 }
 
-.seven {
+.card-7 {
     top:467px;
     right:0;
 }
 
-.eight {
+.card-8 {
     top:696px;
     right:0;
 }

@@ -1,0 +1,83 @@
+@font-face {
+    font-family: Medieval;
+    src: url("/MedievalSharp-Regular.ttf");
+}
+
+.modalContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    height: 100%;
+    margin:0 auto;
+    background: url('/images/hero-big.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.message {
+    font-family: Medieval;
+    color:#495C7D;
+    font-size:44px;
+    -webkit-text-stroke: 1px rgb(174, 174, 174);
+    text-align: center;
+    width: 100%;
+}
+
+.modalContainer{
+    // padding:10px;
+    // width: 30%;
+    // margin:0 auto;
+    // background:gray;
+    border-image-slice: 84 136 77 135;
+    border-image-width: 84px 155px 111px 167px;
+    border-image-outset: 0px 0px 26px 0px;
+    border-image-repeat: stretch stretch;
+    border-image-source: url(https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Decorative-Elements-PNG/Wooden_Frame_Border_PNG_Clipart.png?m=1559095285);
+    border-style: solid;
+    border-width: 20px;
+    padding-bottom:10px;
+    // padding:10px;
+}
+
+.modalBox{
+    height: 45%;
+    background:#F2E0CC;
+    border-radius: 5px  ;
+    width:80%;
+    margin:0 auto;
+    border-image-slice: 84 100 77 135;
+    border-image-width: 53px 93px 66px 100px;
+    border-image-outset: 0px 0px 0px 0px;
+    border-image-repeat: stretch stretch;
+    border-image-source: url(https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Decorative-Elements-PNG/Wooden_Frame_Border_PNG_Clipart.png?m=1559095285);
+    border-style: solid;
+    border-width: 14px;
+    background-clip: content-box;
+}
+.modalBoxInner{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.next{
+    font-family: Medieval;
+    color:#495C7D;
+    font-size:44px;
+    -webkit-text-stroke: 1px rgb(174, 174, 174);
+    background: url('/images/ribbon.png');
+    position:relative;
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    padding: 68px;
+    padding-top: 28px;
+    padding-left: 60px;
+    margin-top: 20px;
+
+}

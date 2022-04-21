@@ -106,3 +106,27 @@ html{
 button{
   cursor: pointer;
 }
+
+//modalAnimation
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: all 500ms ease-in-out;
+  background-color: rgba(0, 0, 0, 0.75)!important;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+.ReactModal__Content{
+  background-color:rgb(21, 29, 77)!important;
+  padding:75px;
+}

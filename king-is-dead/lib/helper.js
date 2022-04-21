@@ -58,3 +58,29 @@ export function randomizeFollowers(mapState){
 
     return finalMapState
 }
+
+export function setIntervalX(callback, delay, repetitions) {
+    var x = 0;
+    var intervalID = window.setInterval(function () {
+
+       callback(x);
+
+       if (++x === repetitions) {
+           window.clearInterval(intervalID);
+       }
+    }, delay);
+}
+  
+export  function swap(array, from, to) {
+    const arr = [...array];
+     arr.splice(from, 1, arr.splice(to, 1, arr[from])[0]);
+    return arr;
+ }
+
+export const removeFromArray = (array,element)=>{
+    const index= array.indexOf(element);
+    if (index > -1) {
+      array.splice(index, 1);
+    }
+    return array
+  }

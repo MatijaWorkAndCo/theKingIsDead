@@ -15,6 +15,7 @@
   height: calc(100vh - 30px);
   margin: 15px;
   flex: 1;
+  height:954px;
 }
 
 .right{
@@ -70,4 +71,20 @@ display: flex;
 
 .followers {
 display: flex;
+}
+
+.currentTurn{
+  font-family: Medieval;
+  font-size:24px;
+  white-space: nowrap;
+  /* -webkit-text-stroke: 1px rgb(103, 103, 103); */
+  margin-right:10px;
+}
+
+.playerOneTurn{
+  color:rgb(57, 72, 186);
+}
+
+.playerTwoTurn{
+  color:rgb(162, 32, 32);
 }

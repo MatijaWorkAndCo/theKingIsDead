@@ -1,9 +1,12 @@
-import {useEffect,useState} from 'react';
+import {useEffect,useMemo,useState,useCallback} from 'react';
 import cx from 'classnames';
 
+import RegionCards from './RegionCards';
 import { EnglishControlDisc, InstabilityDisc, ScottishControlDisc, WelshControlDisc } from '../Disc/Disc.jsx';
 import { ScottishFollower, EnglishFollower, WelshFollower } from '../Follower/Follower.jsx';
-import { MorayCard,DevonCard ,EssexCard ,GwyneddCard ,LancasterCard ,NorthumbriaCard ,StrathclydeCard ,WarwickCard}from "../Card/Card.jsx";
+
+import {setIntervalX} from '../../lib/helper';
+
 
 import styles from './BoardMap.module.scss';
 
@@ -36,36 +39,9 @@ const renderElement = (regionState,handleClick,region) => {
     )
 }
 
-  
-const BoardMap = ({mapState, regionCards, summonToCourt})=>{
+const BoardMap = ({cardRef,mapState,regionCards,handleFollowerOnMapClick,handleFollowerInBankClick,handleTeritoryClick})=>{
     const { bank } = mapState;
-    // const follower = 'scottish'||'english'||'welsh';
-    // const region = regionCards;
-    const handleClick = (follower,region)=>{
-       
-    }
-
-    const [faceUpCards, setFaceUpCards] = useState([]);
-
-    const regionCardsMap = {
-        moray: <MorayCard  isFaceup={faceUpCards.includes('moray')}/>,
-        devon: <DevonCard isFaceup={faceUpCards.includes('devon')}/>,
-        essex: <EssexCard isFaceup={faceUpCards.includes('essex')}/>,
-        gwynedd: <GwyneddCard isFaceup={faceUpCards.includes('gwynedd')}/>,
-        lancaster: <LancasterCard isFaceup={faceUpCards.includes('lancaster')}/>,
-        northumbria: <NorthumbriaCard isFaceup={faceUpCards.includes('northumbria')}/>,
-        strathclyde: <StrathclydeCard isFaceup={faceUpCards.includes('strathclyde')}/>,
-        warwick: <WarwickCard isFaceup={faceUpCards.includes('warwick')}/>,
-    }
-
-    useEffect(() => {
-        regionCards.forEach((element,index) => {
-            setTimeout(() => {
-                setFaceUpCards([...faceUpCards,element])
-            }, 600 * (index+1));
-        });
-    }, [])
-
+    
     return(
         <div className={styles.boardWrapper}>
             <img 
@@ -75,35 +51,30 @@ const BoardMap = ({mapState, regionCards, summonToCourt})=>{
             />
             <div className={cx(styles.bank)}>
                 <div className={styles.bankFollowers}>
-                    {bank?.scottish !== 0 && [...Array(bank?.scottish)].map((e, i) => <button key={`bank-scottish-${i}`} onClick={handleClick}><ScottishFollower /></button>)}
+                    {bank?.scottish !== 0 && [...Array(bank?.scottish)].map((e, i) => <button key={`bank-scottish-${i}`} onClick={()=>handleFollowerInBankClick("scottish")}><ScottishFollower /></button>)}
                 </div>
                 <div className={styles.bankFollowers}>
-                    {bank?.english!==0 && [...Array(bank?.english)].map((e, i) => <button  key={`bank-english-${i}`}  onClick={handleClick}><EnglishFollower/></button>)}
+                    {bank?.english!==0 && [...Array(bank?.english)].map((e, i) => <button  key={`bank-english-${i}`}  onClick={()=>handleFollowerInBankClick("english")}><EnglishFollower/></button>)}
                 </div>
                 <div className={styles.bankFollowers}>
-                    {bank?.welsh!==0 && [...Array(bank?.welsh)].map((e, i) =><button key={`bank-welsh-${i}`} onClick={handleClick}> <WelshFollower /></button>)}
+                    {bank?.welsh!==0 && [...Array(bank?.welsh)].map((e, i) =><button key={`bank-welsh-${i}`} onClick={()=>handleFollowerInBankClick("welsh")}> <WelshFollower /></button>)}
                 </div>
             </div>
-            <div className={cx(styles.moray,styles.region)}>{renderElement(mapState.moray,summonToCourt,"moray")}</div>
-            <div className={cx(styles.strathclyde,styles.region)}>{renderElement(mapState.strathclyde,summonToCourt,"strathclyde")}</div>
-            <div className={cx(styles.northumbria,styles.region)}>{renderElement(mapState.northumbria,summonToCourt,"northumbria")}</div>
-            <div className={cx(styles.lancaster,styles.region)}>{renderElement(mapState.lancaster,summonToCourt,"lancaster")}</div>
-            <div className={cx(styles.gwynedd,styles.region)}>{renderElement(mapState.gwynedd,summonToCourt,"gwynedd")}</div>
-            <div className={cx(styles.warwick,styles.region)}>{renderElement(mapState.warwick,summonToCourt,"warwick")}</div>
-            <div className={cx(styles.essex,styles.region)}>{renderElement(mapState.essex,summonToCourt,"essex")}</div>
-            <div className={cx(styles.devon,styles.region)}>{renderElement(mapState.devon,summonToCourt,"devon")}</div>
+            <div onClick={()=>handleTeritoryClick('moray')} className={cx(styles.moray,styles.region)}>{renderElement(mapState.moray,handleFollowerOnMapClick,"moray")}</div>
+            <div onClick={()=>handleTeritoryClick('strathclyde')} className={cx(styles.strathclyde,styles.region)}>{renderElement(mapState.strathclyde,handleFollowerOnMapClick,"strathclyde")}</div>
+            <div onClick={()=>handleTeritoryClick('northumbria')} className={cx(styles.northumbria,styles.region)}>{renderElement(mapState.northumbria,handleFollowerOnMapClick,"northumbria")}</div>
+            <div onClick={()=>handleTeritoryClick('lancaster')} className={cx(styles.lancaster,styles.region)}>{renderElement(mapState.lancaster,handleFollowerOnMapClick,"lancaster")}</div>
+            <div onClick={()=>handleTeritoryClick('gwynedd')} className={cx(styles.gwynedd,styles.region)}>{renderElement(mapState.gwynedd,handleFollowerOnMapClick,"gwynedd")}</div>
+            <div onClick={()=>handleTeritoryClick('warwick')} className={cx(styles.warwick,styles.region)}>{renderElement(mapState.warwick,handleFollowerOnMapClick,"warwick")}</div>
+            <div onClick={()=>handleTeritoryClick('essex')} className={cx(styles.essex,styles.region)}>{renderElement(mapState.essex,handleFollowerOnMapClick,"essex")}</div>
+            <div onClick={()=>handleTeritoryClick('devon')} className={cx(styles.devon,styles.region)}>{renderElement(mapState.devon,handleFollowerOnMapClick,"devon")}</div>
             <div className={cx(styles.france,styles.region)}>
                 {[...Array(mapState.france.instabilityDiscs)].map((e, i) => <InstabilityDisc key={`instability-${i}`}/>)}
             </div>
 
-            <div className={cx(styles.regionCardPlacement,styles.one)}>{regionCardsMap[regionCards[0]]}</div>
-            <div className={cx(styles.regionCardPlacement,styles.two)}>{regionCardsMap[regionCards[1]]}</div>
-            <div className={cx(styles.regionCardPlacement,styles.three)}>{regionCardsMap[regionCards[2]]}</div>
-            <div className={cx(styles.regionCardPlacement,styles.four)}>{regionCardsMap[regionCards[3]]}</div>
-            <div className={cx(styles.regionCardPlacement,styles.five)}>{regionCardsMap[regionCards[4]]}</div>
-            <div className={cx(styles.regionCardPlacement,styles.six)}>{regionCardsMap[regionCards[5]]}</div>
-            <div className={cx(styles.regionCardPlacement,styles.seven)}>{regionCardsMap[regionCards[6]]}</div>
-            <div className={cx(styles.regionCardPlacement,styles.eight)}>{regionCardsMap[regionCards[7]]}</div>
+         
+            <RegionCards cardRef={cardRef} regionCards={regionCards}/>
+
         </div>
     )
 }

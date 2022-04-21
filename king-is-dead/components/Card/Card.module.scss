@@ -33,3 +33,11 @@
         transform: rotateY(180deg);
     }
 }
+
+.negotiationDisc{
+    position:absolute;
+    top:75%;
+    left:30%;
+    transform: translate(-50%,-50%);
+    z-index: 999999;
+}
